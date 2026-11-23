@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Popup + Firebase Realtime DB</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #eef2f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            width: 100%;
+            max-width: 430px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #0d6efd;
+        }
+        h2 {
+            text-align: center;
+            color: #0d6efd;
+            margin-bottom: 6px;
+        }
+        .sub {
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .google-btn {
+            width: 100%;
+            padding: 11px;
+            background: #1a73e8;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .google-btn:hover {
+            background: #1558b0;
+        }
+        #detailsSection {
+            display: none;
+            margin-top: 15px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f5f8fc;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .user-info img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .user-info p {
+            font-size: 13px;
+            color: #555;
+        }
+        .field {
+            margin-bottom: 13px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        input, select {
+            width: 100%;
+            padding: 9px 11px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .save-btn {
+            width: 100%;
+            padding: 11px;
+            background: #8dc63f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .save-btn:hover {
+            background: #77ab31;
+        }
+        .logout-btn {
+            width: 100%;
+            padding: 8px;
+            background: transparent;
+            color: #d9534f;
+            border: 1px solid #d9534f;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #msg {
+            margin-top: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Google + Realtime DB</h2>
+    <p class="sub">Google popup se login karein aur details save karein</p>
+
+    <!-- Step 1: Google Popup Button -->
+    <button id="googleLoginBtn" class="google-btn">Continue with Google</button>
+
+    <!-- Step 2: Login ke baad extra details form -->
+    <div id="detailsSection">
+        <div class="user-info">
+            <img id="userPhoto" src="" alt="Avatar">
+            <div>
+                <strong id="userName"></strong>
+                <p id="userEmail"></p>
+            </div>
+        </div>
+
+        <form id="extraDetailsForm">
+            <div class="field">
+                <label for="phone">Phone / WhatsApp</label>
+                <input type="tel" id="phone" placeholder="03xx-xxxxxxx" required>
+            </div>
+
+            <div class="field">
+                <label for="course">Course / Interest</label>
+                <select id="course" required>
+                    <option value="">Select karein</option>
+                    <option value="Web & Mobile App Development">Web & Mobile App Development</option>
+                    <option value="Frontend / React">Frontend / React</option>
+                    <option value="Graphic Designing">Graphic Designing</option>
+                </select>
+            </div>
+
+            <button type="submit" id="saveBtn" class="save-btn">Save to Realtime DB</button>
+        </form>
+
+        <button type="button" id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+
+    <p id="msg"></p>
+</div>
+
+<script type="module" src="./script.js"></script>
+</body>
+</html>
